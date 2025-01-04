@@ -1,1 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.dmm.middleware.dynamic.thread.pool.sdk.config.DynamicThreadPoolConfig
+# https://www.cnblogs.com/auv2009/p/18547717 ??????
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.dmm.middleware.dynamic.thread.pool.sdk.config.DynamicThreadPoolAutoConfig

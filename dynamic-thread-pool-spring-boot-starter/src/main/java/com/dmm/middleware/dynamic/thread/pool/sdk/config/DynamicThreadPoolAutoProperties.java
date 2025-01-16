@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
  * @date 2025/1/4 17:08
  * @description 动态线程池配置
  */
-@Component
 @ConfigurationProperties(prefix = "dynamic.thread.pool.config", ignoreInvalidFields = true)
 public class DynamicThreadPoolAutoProperties {
 

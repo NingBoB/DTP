@@ -14,6 +14,7 @@ import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Configuration
 @EnableScheduling
+@EnableConfigurationProperties(DynamicThreadPoolAutoProperties.class)
 public class DynamicThreadPoolAutoConfig {
 
     private final Logger logger = LoggerFactory.getLogger(DynamicThreadPoolAutoConfig.class.getName());
@@ -103,7 +105,9 @@ public class DynamicThreadPoolAutoConfig {
 
     @Bean("dynamicThreadPoolRedisTopic")
     public RTopic threadPoolConfigAdjustListener(RedissonClient redissonClient, ThreadPoolConfigAdjustListener listener, RedisRegistry redisRegistry){
+        // 创建topic
         RTopic topic = redissonClient.getTopic(RegistryEnumVO.DYNAMIC_THREAD_POOL_REDIS_TOPIC.getKey() + "_" + applicationName);
+        // 监听topic
         topic.addListener(ThreadPoolConfigEntity.class, listener);
         // 测试用，实际可以不用返回，消息发布操作由redis自己实现
         return topic;
